@@ -1,16 +1,23 @@
+//
+//  RaveLessFormListViewController.swift
+//  AppConnectSwift
+//
+//  Created by Suman Sucharit Das on 3/31/16.
+//  Copyright © 2016 Medidata Solutions. All rights reserved.
+//
+
 import UIKit
 
-class FormListViewController: UITableViewController {
-
+class RaveLessFormListViewController: UITableViewController {
+    
     var objects = [AnyObject]()
     var userID : Int64!
     
     var spinner : UIActivityIndicatorView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        
         spinner = UIActivityIndicatorView.init(activityIndicatorStyle: .Gray)
         spinner.center = CGPointMake(self.view.frame.size.width/2.0, 22);
         spinner.hidesWhenStopped = true;
@@ -23,7 +30,7 @@ class FormListViewController: UITableViewController {
         // Begin loading the forms for the logged-in user
         loadForms()
     }
-
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -58,7 +65,7 @@ class FormListViewController: UITableViewController {
                     }
                     return
                 }
-
+                
                 // Get the subjects for the current user and then iterate over
                 // the subjects to sync their forms. The objects returned from
                 // these methods are only usable during the lifetime of this
@@ -81,7 +88,7 @@ class FormListViewController: UITableViewController {
             }
         }
     }
-
+    
     func populateForms() {
         // This is how the UI retrieves forms from the datastore for display.
         // The user could have multiple subjects if they're assigned to multiple
@@ -102,9 +109,9 @@ class FormListViewController: UITableViewController {
     func doLogout() {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     // MARK: - Segues
-
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let indexPath = self.tableView.indexPathForSelectedRow {
             let form = objects[indexPath.row] as! MDForm
@@ -117,7 +124,7 @@ class FormListViewController: UITableViewController {
             }
         }
     }
-
+    
     // MARK: - Table View
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -128,23 +135,25 @@ class FormListViewController: UITableViewController {
         let sequeIdentifier = ["FORM1" : "ShowOnePageForm", "FORM2" : "ShowMultiPageForm"][form.formOID]
         performSegueWithIdentifier(sequeIdentifier!, sender: self)
     }
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
+        
         let object = objects[indexPath.row] as! MDForm
         
         cell.textLabel!.text = object.name
         return cell
     }
-
+    
+    
+    
 }
 

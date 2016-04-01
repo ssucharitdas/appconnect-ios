@@ -10,6 +10,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //TODO: remove these when done debugging
+        usernameField.text = "sub001@sqa.com"
+        passwordField.text = "Password1"
         
         loginButton.setTitle("Logging In", forState: UIControlState.Disabled)
     }
@@ -68,9 +71,15 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Pass the userID into the FormList controller
         if segue.identifier == "LoginSuccess" {
-            let navigationController = segue.destinationViewController as! UINavigationController
-            let formListViewController = navigationController.viewControllers.first as! FormListViewController
+            let tabController = segue.destinationViewController as! UITabBarController
+            let navigationController = tabController.viewControllers![0] as! UINavigationController
+            let formListViewController = navigationController.topViewController as! FormListViewController
             formListViewController.userID = self.userID!
+            
+            let navigationControllerForRaveless = tabController.viewControllers![1] as! UINavigationController
+            let raveLessFormListViewController = navigationControllerForRaveless.topViewController as! RaveLessFormListViewController
+            raveLessFormListViewController.userID = self.userID!
+
         }
     }
 
