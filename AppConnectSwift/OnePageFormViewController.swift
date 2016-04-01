@@ -25,6 +25,7 @@ class OnePageFormViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.hidden = true
 
         formTitle.text = form.name
         

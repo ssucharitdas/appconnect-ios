@@ -15,6 +15,7 @@ class FieldViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.hidden = true
                 
         fieldHeader.text = field.label
         

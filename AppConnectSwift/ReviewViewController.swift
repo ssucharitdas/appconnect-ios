@@ -12,6 +12,7 @@ class ReviewViewController: UIViewController {
     var form: MDForm!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.hidden = true
 
         // Do any additional setup after loading the view.
         let fields = form.fields

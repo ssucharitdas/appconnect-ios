@@ -25,6 +25,7 @@ class MultiPageFormViewController: UIViewController, UIPageViewControllerDelegat
         // Configure the page view controller and add it as a child view controller.
         self.pageViewController = UIPageViewController(transitionStyle: .PageCurl, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.delegate = self
+        self.tabBarController?.tabBar.hidden = true
         
         // Setup field data in the ModelController
         self.modelController = ModelController()
