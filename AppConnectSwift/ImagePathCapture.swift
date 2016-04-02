@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ImageCapture: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+class ImagePathCapture: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     var formID : String!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var selectImage: UIButton!
     @IBOutlet weak var uploadImage: UIButton!
-    
+    @IBOutlet weak var imagePath: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,8 @@ class ImageCapture: UIViewController, UIImagePickerControllerDelegate, UINavigat
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        
+        let imagePathURL = info[UIImagePickerControllerReferenceURL] as? NSURL
+        imagePath.text = imagePathURL?.absoluteString
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

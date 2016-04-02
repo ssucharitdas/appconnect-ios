@@ -17,7 +17,7 @@ class RaveLessFormListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        forms = ["Image Capture","Video Capture"]
+        forms = ["Image Upload","Video Upload","Image Path Selection"]
         
         let backButton = UIBarButtonItem(title: "Log Out", style: UIBarButtonItemStyle.Plain, target: self, action: "doLogout")
         self.navigationItem.setLeftBarButtonItem(backButton, animated: true)
@@ -57,6 +57,11 @@ class RaveLessFormListViewController: UITableViewController {
                 navigationItem.title = nil
                 controller.formID = "Video"
             }
+            else if self.formID == "ImagePathCapture"{
+                let controller = segue.destinationViewController as! ImagePathCapture
+                navigationItem.title = nil
+                controller.formID = "ImagePath"
+            }
         }
     }
     
@@ -68,6 +73,9 @@ class RaveLessFormListViewController: UITableViewController {
         }
         else if(indexPath.row == 1){
             self.formID = "VideoCapture"
+        }
+        else if(indexPath.row == 2){
+            self.formID = "ImagePathCapture"
         }
         let sequeIdentifier = self.formID
         performSegueWithIdentifier(sequeIdentifier!, sender: self)
